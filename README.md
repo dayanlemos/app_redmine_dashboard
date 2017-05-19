@@ -16,3 +16,14 @@ Start npm  http server
   $ http-server
 
 
+
+## Configs
+
+Put your Redmine server URL and Auth key in the file: js/constants.js
+
+
+### Questions
+
+E-mail: dayan-lemos@hotmail.com
+Skype: dayan.lemos
+
