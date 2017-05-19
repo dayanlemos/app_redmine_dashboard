@@ -1,0 +1,108 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5><i class="fa fa-filter"></i> Filtros</h5>
+                </div>
+                <div class="ibox-content" style="display: block;">
+                    <form role="form" class="form-inline ng-pristine ng-valid">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <div>Horas de trabalho / dia</div>
+                                    <input ng-change="setHoursPerDay(hoursPerDay)" value="01/02/2017" ng-model="hoursPerDay" type="text" class="form-control" placeholder="ex.: 8" style="width: 100px">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div>De:</div>
+
+                                    <input data-provide="datepicker" value="10/02/2017"  data-date-format="dd/mm/yyyy" class="form-control datepicker" ng-model="startDate" type="text">
+
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div>Até:</div>
+                                    <input data-provide="datepicker"  data-date-format="dd/mm/yyyy" class="form-control" ng-model="endDate" type="text">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <div>Usuário:</div>
+                                    <select class="form-control" ng-model="selectedUser" ng-change="setUser(selectedUser)">
+                                        <option ng-repeat="user in users" value="{{user.id}}">{{user.firstname}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <div>&nbsp;</div>
+                                    <button class="btn btn-primary" type="submit" ng-click="getTimeEntries(startDate, endDate, selectedUser)">Buscar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row lazur-bg" style="padding: 8px; font-size: 1.5em">
+                <div class="col-md-3">Data</div>
+                <div class="col-md-2">Projeto</div>
+                <div class="col-md-2">Tarefa</div>
+                <div class="col-md-2">Horas</div>
+                <div class="col-md-3">Resumo</div>
+            </div>
+            <div class="row">
+            <table class="table">
+
+                <tr ng-repeat="date in timeEntriesByDate | orderBy:'-date'">
+                    <td class="col-md-3 lazur-bg">
+                        <div class="widget">
+                            <h1>{{date.date}}</h1>
+                        </div>
+                    </td>
+                    <td class="col-md-6 white-bg" style="font-size: 1.3em">
+                        <div class="row" ng-repeat="timeEntry in date.timeEntries">
+                            <div class="col-md-5">
+                                {{timeEntry.project.name}}
+                            </div>
+                            <div class="col-md-5">
+                                #{{timeEntry.issue.id}}
+                            </div>
+                            <div class="col-md-2">
+                                {{timeEntry.hours}}
+                            </div>
+                        </div>
+                    </td>
+                    <td style="cursor: pointer" onclick="window.open('http://redmine.getconsultoria.com.br/time_entries/new')" class="col-md-3" ng-class="{'red-bg':date.status=='pendente','navy-bg':date.status=='fechado'}">
+                        <div class="widget" style="width: 60%; float: left;">
+                            <h1>{{date.hoursTotal}}</h1>
+                            <h4>Horas apropriadas</h4>
+                            <small></small>
+                        </div>
+                        <div ng-show="date.status=='pendente'" class="widget text-center" style="width: 40%; float: left;">
+                            <i class="fa fa-exclamation fa-4x"></i>
+                            <h3>Clique</h3>
+                            <small>para apropriar</small>
+                        </div>
+                        <div ng-show="date.status=='fechado'" class="widget text-center" style="width: 40%; float: left;">
+                            <i class="fa fa-check fa-4x"></i>
+                            <h3>Parabéns!</h3>
+                            <small>Apropriações em dia</small>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            </div>
+        </div>
+    </div>
+</div>

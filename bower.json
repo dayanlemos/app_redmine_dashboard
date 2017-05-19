@@ -1,0 +1,24 @@
+{
+  "name": "app_redmine_dashboard",
+  "authors": [
+    "Dayan Lemos <dayanlemoslemos@gmail.com>"
+  ],
+  "description": "",
+  "main": "index.html",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "angularjs#^1.5.9",
+    "moment": "^2.17.0",
+    "twix": "^1.1.2",
+    "angular-datepicker": "^2.0.3",
+    "bootstrap-datepicker": "^1.6.4"
+  }
+}
